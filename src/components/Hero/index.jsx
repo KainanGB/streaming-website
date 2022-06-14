@@ -1,3 +1,14 @@
+import * as S from "./style";
+
+import HeroImage from "../../assets/hero.jpg";
+import { Cards } from "../Cards";
+
 export const Hero = () => {
-  return <h1>HELLO WORLD</h1>;
+  return (
+    <S.Container>
+      <S.HeroContent image={HeroImage}>
+        <Cards />
+      </S.HeroContent>
+    </S.Container>
+  );
 };

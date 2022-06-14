@@ -14,6 +14,12 @@ export default createGlobalStyle`
     body {
       background-color: ${pallete.darkGrey};
       color: ${pallete.primaryClrWhite};
+      /*min-height:100vh ;*/
+    }
+
+    img {
+      display:block;
+      width:100%;
     }
 
 
