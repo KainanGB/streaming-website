@@ -95,12 +95,12 @@ export const Cards = () => {
       </S.Card>
 
       <S.Cards secondary>
-        <S.Card>
+        <S.Card cardBigger>
           <S.CardTitle>Shop on the Amazon App</S.CardTitle>
           <S.CardSeeMore>See More</S.CardSeeMore>
         </S.Card>
 
-        <S.CardImage>
+        <S.CardImage cardBigger>
           <img src={laptopImg} alt="" />
         </S.CardImage>
       </S.Cards>

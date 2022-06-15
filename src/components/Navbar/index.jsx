@@ -1,4 +1,5 @@
 import * as S from "./style.js";
+import { Link } from "react-router-dom";
 
 import amazonLogo from "../../assets/amazon-logo.svg";
 import cartImage from "../../assets/cart.svg";
@@ -10,7 +11,9 @@ export function Navbar() {
   return (
     <S.Navbar>
       <S.TopHeader>
-        <S.Logo image={amazonLogo}>.com.br</S.Logo>
+        <Link to="/">
+          <S.Logo image={amazonLogo}>.com.br</S.Logo>
+        </Link>
         <S.Location>
           <IconLocation size={18} />
           <span>

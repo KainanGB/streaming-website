@@ -12,13 +12,14 @@ export const Cards = styled.div`
   grid-template-columns: repeat(3, 400px);
   justify-content: ${(props) => (props.secondary ? "column" : "center")};
   gap: 3rem;
+  margin: 0 auto;
 `;
 
 export const Card = styled.div`
   background-color: ${pallete.primaryClrWhite};
   color: black;
-  padding: 1em;
-
+  padding: ${(props) => (props.cardBigger ? "2.65em 1em" : "1em")};
+  /*padding: 1em 0;*/
   display: ${(props) => (props.spaceBetween ? "flex" : "block")};
   flex-direction: ${(props) => (props.spaceBetween ? "column" : "row")};
   justify-content: ${(props) =>
@@ -70,7 +71,13 @@ export const CardImage = styled.div`
   display: ${(props) => (props.smallCards ? "flex" : "block")};
   align-items: ${(props) => (props.smallCards ? "center" : "unset")};
   justify-content: ${(props) => (props.smallCards ? "center" : "initial")};
-  height: ${(props) => (props.mediumCard ? "auto" : "8rem")};
+  height: ${(props) => {
+    if (props.mediumCard) {
+      return "auto";
+    } else if (props.cardBigger) {
+      return "100%";
+    } else return "8rem";
+  }};
 
   background-color: ${(props) => (props.smallCards ? "transparent" : "red")};
   padding: ${(props) => (props.smallCards ? "2em" : "0")};
@@ -78,11 +85,10 @@ export const CardImage = styled.div`
   img {
     width: ${(props) => {
       if (props.smallCards) {
-        return "5.625rem";
-      } else if (props.mediumCard) {
-        return;
+        return "4.625rem";
       } else return "100%";
     }};
+    height: 100%;
   }
 `;
 

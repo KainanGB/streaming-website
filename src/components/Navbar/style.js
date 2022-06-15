@@ -12,6 +12,11 @@ export const TopHeader = styled.header`
   width: 100%;
   padding: 1em;
   /*padding-bottom: 0.5em;*/
+
+  a {
+    color: ${pallete.primaryClrWhite};
+    text-decoration: inherit;
+  }
 `;
 
 export const Logo = styled.div`
