@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./Cards.Style";
 
 import profileImg from "../../assets/profile.svg";
 import boxesImg from "../../assets/boxes-img.png";

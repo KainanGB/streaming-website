@@ -2,7 +2,7 @@ import { Navbar } from "../../components/Navbar";
 import { Cards } from "../../components/Cards";
 
 import heroImage from "../../assets/hero.jpg";
-import * as S from "./style";
+import * as S from "./HomePage.Style";
 
 export const HomePage = () => {
   return (

@@ -101,7 +101,7 @@ export const Login = styled.button`
   }
 `;
 
-export const Cart = styled.a`
+export const Cart = styled.div`
   background-image: url(${(props) => props.image});
   background-repeat: no-repeat;
   background-size: contain;
@@ -141,22 +141,32 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   background-color: ${pallete.secondaryClrMedium};
-  padding: 0.3em 0.5em;
+  padding: 0.5em 1em;
 
   div,
   a {
     border: 0.1px solid transparent;
-    padding: 0.5em 0.5em;
+    margin-right: 0.5em;
     cursor: pointer;
     font-size: 16px;
+    color: #ffffff;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
 
     &:hover {
       border: 0.1px solid ${pallete.primaryClrWhite};
     }
   }
+
+  a:first-child {
+    margin-right: 0;
+  }
 `;
 
-export const HeaderMenu = styled.div``;
+export const HeaderMenu = styled.div`
+  padding: 0;
+  margin: 0;
+`;
 
 export const Link = styled.a``;
 

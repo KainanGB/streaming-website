@@ -14,71 +14,45 @@ import { CartProvider } from "./hooks/useCart";
 createServer({
   models: {
     products: Model,
+    //cart: Model,
   },
 
   routes() {
     this.namespace = "api";
 
-    //this.get("/category/furniture", () => {
-    //  return [
-    //    {
-    //      name: "Mock name 1",
-    //      price: "3000",
-    //      description: "Mock description 1",
-    //      rating: 4,
-    //      id: generateId(),
-    //      image: "",
-    //    },
-
-    //    {
-    //      name: "Mock name 2",
-    //      price: "1000",
-    //      description: "Mock description 2",
-    //      rating: 5,
-    //      id: generateId(),
-    //    },
-
-    //    {
-    //      name: "Mock name 3",
-    //      price: "2000",
-    //      description: "Mock description 3",
-    //      rating: 3,
-    //      id: generateId(),
-    //    },
-    //  ];
-    //});
-
-    //this.patch("/products/:id", (schema, request) => {
-    //  let id = request.params.id;
-    //  console.log(id);
-    //  return schema.products.find(id);
-    //});
     this.get("/products/:id", (schema, request) => {
       let id = request.params.id;
 
-      return schema.products.find(id);
+      //let newProduct = products.new({ name: "teste" });
+      //newProduct.id = 2;
+      //newProduct.save();
+
+      //console.log(newProduct);
+
+      return schema.cart.create({ name: "teste" });
     });
+
+    this.delete("/products/:id", (schema, request) => {
+      let id = request.params.id;
+
+      return schema.products.find(id).destroy();
+    });
+
     this.get("/products", (schema, request) => {
       return schema.products.all();
-      //return [
-      //  {
-      //  {
-      //name: "Móveis",
-      //price: "100",
-      //description: "teste3",
-      //rating: 2,
-      //id: generateId(),
-      //image: defaultImg,
-      //  },
-      //  {
-
-      //  },
-      //  {
-
-      //  },
-      //];
     });
   },
+
+  //seeds(server) {
+  //  server.create("cart", {
+  //    name: "Mouse sem fio Logitech",
+  //    price: "58,90",
+  //    description: "teste",
+  //    rating: 5,
+  //    id: generateId(),
+  //    image: defaultImg,
+  //  });
+  //},
 
   seeds(server) {
     server.create("product", {
