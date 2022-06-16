@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import * as pallete from "./variables";
 
 export default createGlobalStyle`
@@ -6,7 +6,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing:border-box;
- 
     
     font-size: 14px;
     font-family: "AmazonEmber_W_He", sans-serif;
@@ -43,5 +42,8 @@ export default createGlobalStyle`
     h4 {
       font-size:14px;
     }
+
+    
   }
-`;
+
+  `;

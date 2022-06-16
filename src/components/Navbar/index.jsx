@@ -6,8 +6,11 @@ import cartImage from "../../assets/cart.svg";
 import { FaSearchLocation as IconLocation } from "react-icons/fa";
 
 import { MdSearch as IconSearch } from "react-icons/md";
+import { useCart } from "../../hooks/useCart.jsx";
 
 export function Navbar() {
+  const { cart } = useCart();
+
   return (
     <S.Navbar>
       <S.TopHeader>
@@ -30,7 +33,7 @@ export function Navbar() {
         </S.SearchBar>
         <S.Login>Login</S.Login>
         <S.Cart image={cartImage}>
-          <span>2</span>
+          <span>{cart.length}</span>
           <span>Cart</span>
         </S.Cart>
       </S.TopHeader>
