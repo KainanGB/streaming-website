@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
 
-import { v4 as generateId } from "uuid";
 const CartContext = createContext({});
 
 // TODOS
@@ -34,9 +32,13 @@ export function CartProvider({ children }) {
     const findIndex = updatedCart.findIndex((product) => {
       return product.id === productId;
     });
+    const amount = updatedCart[findIndex].amount;
 
     if (findIndex < 0) {
       return console.error("Item não existe no carrinho");
+    } else if (amount > 1) {
+      updatedCart[findIndex].amount = amount - 1;
+      return setCart(updatedCart);
     } else {
       updatedCart.splice(findIndex, 1);
       return setCart(updatedCart);
@@ -52,6 +54,5 @@ export function CartProvider({ children }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-
   return context;
 }

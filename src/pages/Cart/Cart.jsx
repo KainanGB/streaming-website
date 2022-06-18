@@ -8,7 +8,8 @@ export const Cart = () => {
   const { cart, removeProduct } = useCart();
 
   const total = cart.reduce((acc, currentValue) => {
-    return acc + currentValue.price * currentValue.amount;
+    const total = currentValue.price * currentValue.amount;
+    return acc + total;
   }, 0);
 
   return (

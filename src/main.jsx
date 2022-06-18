@@ -46,17 +46,6 @@ createServer({
     });
   },
 
-  //seeds(server) {
-  //  server.create("cart", {
-  //    name: "Mouse sem fio Logitech",
-  //    price: "58,90",
-  //    description: "teste",
-  //    rating: 5,
-  //    id: generateId(),
-  //    image: defaultImg,
-  //  });
-  //},
-
   seeds(server) {
     server.create("product", {
       name: "Mouse sem fio Logitech",
