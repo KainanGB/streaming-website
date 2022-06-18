@@ -10,14 +10,6 @@ const CartContext = createContext({});
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/api/products").then((response) => {
-      const data = response.data.products;
-      setProducts(data);
-    });
-  }, []);
 
   async function addProduct(productId, data) {
     const newProductArray = [...cart];
@@ -52,7 +44,7 @@ export function CartProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ products, cart, addProduct, removeProduct }}>
+    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
       {children}
     </CartContext.Provider>
   );
