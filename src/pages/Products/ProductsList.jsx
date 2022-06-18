@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { useCart } from "../../hooks/useCart";
-
-import axios from "axios";
 
 import * as S from "./ProductList.Style";
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const { addProduct, removeProduct } = useCart();
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/api/products").then((response) => {
-      const data = response.data.products;
-      setProducts(data);
-    });
-
-    //console.log(products);
-  }, [removeProduct]);
+  const { products, addProduct, removeProduct } = useCart();
 
   const handleAddProduct = (id, data) => {
     addProduct(id, data);

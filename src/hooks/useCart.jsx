@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
+import { v4 as generateId } from "uuid";
 const CartContext = createContext({});
 
 // TODOS
@@ -9,11 +10,18 @@ const CartContext = createContext({});
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/products").then((response) => {
+      const data = response.data.products;
+      setProducts(data);
+    });
+  }, []);
 
   async function addProduct(productId, data) {
     const newProductArray = [...cart];
     const findIndex = cart.find((product) => product.id === productId);
-
     const currentAmount = findIndex ? findIndex.amount : 0;
     const amount = currentAmount + 1;
 
@@ -30,23 +38,21 @@ export function CartProvider({ children }) {
 
   async function removeProduct(productId) {
     const updatedCart = [...cart];
+
     const findIndex = updatedCart.findIndex((product) => {
       return product.id === productId;
     });
 
-    findIndex < 0
-      ? console.error("Item não existe no carrinho")
-      : axios
-          .delete(`http://localhost:3000/api/products/${productId}`)
-          .then((response) => {
-            updatedCart.splice(findIndex, 1);
-
-            setCart(updatedCart);
-          });
+    if (findIndex < 0) {
+      return console.error("Item não existe no carrinho");
+    } else {
+      updatedCart.splice(findIndex, 1);
+      return setCart(updatedCart);
+    }
   }
 
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <CartContext.Provider value={{ products, cart, addProduct, removeProduct }}>
       {children}
     </CartContext.Provider>
   );
