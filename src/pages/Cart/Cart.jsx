@@ -1,16 +1,26 @@
 import { Navbar } from "../../components/Navbar";
 import { useCart } from "../../hooks/useCart";
 import * as S from "./Cart.Style";
+import axios from "axios";
 
 import img from "../../assets/boxes-img.png";
+import { useEffect } from "react";
 
 export const Cart = () => {
-  const { cart, removeProduct } = useCart();
+  const { cart, removeProduct, removeAllProducts } = useCart();
 
   const total = cart.reduce((acc, currentValue) => {
     const total = currentValue.price * currentValue.amount;
     return acc + total;
   }, 0);
+
+  //useEffect(() => {
+  //  axios.get("http://localhost:3000/api/cart").then((response) => {
+  //    const data = response.data;
+  //    console.log(data.carts.map((newProductArray) => newProductArray));
+  //  });
+  //  console.log("mudou");
+  //}, [cart]);
 
   return (
     <>
@@ -32,7 +42,7 @@ export const Cart = () => {
                     Descrição : {description}
                   </S.CartInformation>
                   <S.CartProductDescription>
-                    Preço: {price}
+                    Preço: R${price} | 10x de R${price / 10} sem juros
                   </S.CartProductDescription>
                   <S.CartProductDescription>
                     Qualidade: {rating}
@@ -48,7 +58,10 @@ export const Cart = () => {
         </S.CartContent>
 
         <S.CartContent>
-          <h1>{total}</h1>
+          <h1>R$ {total}</h1>
+          <S.CartRemoveAllButton onClick={() => removeAllProducts()}>
+            Remover todos
+          </S.CartRemoveAllButton>
         </S.CartContent>
       </S.Container>
     </>

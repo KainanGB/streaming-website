@@ -30,3 +30,5 @@ export const CartProductDescription = styled.p``;
 
 export const CartProductAmount = styled.div``;
 export const CartDeleteButton = styled.button``;
+
+export const CartRemoveAllButton = styled.button``;

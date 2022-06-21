@@ -1,15 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const CartContext = createContext({});
-
-// TODOS
-// CHECAR SE ITEM JÁ ESTÁ NO CARRINHO E SE SIM EM VEZ DE ADICIONAR NOVAMENTE AUMENTAR SOMENTE A QUANTIDADE DESTE ITEM
-//
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  async function addProduct(productId, data) {
+  function addProduct(productId, data) {
     const newProductArray = [...cart];
     const findIndex = cart.find((product) => product.id === productId);
     const currentAmount = findIndex ? findIndex.amount : 0;
@@ -23,10 +20,15 @@ export function CartProvider({ children }) {
       newProductArray.push(newProduct);
     }
 
+    //axios.post("http://localhost:3000/api/cart", {
+    //  cart,
+    //});
+    console.log(newProductArray);
+
     setCart(newProductArray);
   }
 
-  async function removeProduct(productId) {
+  function removeProduct(productId) {
     const updatedCart = [...cart];
 
     const findIndex = updatedCart.findIndex((product) => {
@@ -45,8 +47,16 @@ export function CartProvider({ children }) {
     }
   }
 
+  function removeAllProducts() {
+    const updatedCart = [...cart];
+    updatedCart.splice(0, cart.length);
+    setCart(updatedCart);
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{ cart, addProduct, removeProduct, removeAllProducts }}
+    >
       {children}
     </CartContext.Provider>
   );

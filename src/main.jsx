@@ -10,11 +10,12 @@ import { v4 as generateId } from "uuid";
 
 import defaultImg from "./assets/laptop-img.jpg";
 import { CartProvider } from "./hooks/useCart";
+import { AuthProvider } from "./hooks/useAuth";
 
 createServer({
   models: {
     products: Model,
-    //cart: Model,
+    carts: Model,
   },
 
   routes() {
@@ -35,14 +36,30 @@ createServer({
     //  return cart;
     //});
 
+    this.get("/products", (schema, request) => {
+      return schema.products.all();
+    });
+
     this.delete("/products/:id", (schema, request) => {
       let id = request.params.id;
 
       return schema.products.find(id).destroy();
     });
 
-    this.get("/products", (schema, request) => {
-      return schema.products.all();
+    this.get("/cart", (schema, request) => {
+      return schema.carts.all();
+    });
+
+    this.post("/cart", (schema, request) => {
+      let attrs = JSON.parse(request.requestBody);
+
+      return schema.carts.create(attrs);
+    });
+
+    this.delete("/cart/:id", (schema, request) => {
+      let id = request.params.id;
+
+      return schema.carts.find(id).destroy();
     });
   },
 
@@ -106,10 +123,12 @@ createServer({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <CartProvider>
-        <GlobalCSS />
-        <App />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <GlobalCSS />
+          <App />
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
