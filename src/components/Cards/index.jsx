@@ -7,20 +7,26 @@ import computerImg from "../../assets/pc-img.jpg";
 import watcheImg from "../../assets/watche-img.png";
 import phoneImg from "../../assets/phone-img.png";
 import fashionImg from "../../assets/fashion-img.png";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Cards = () => {
+  const { name, createdAt, userImage } = useAuth();
+
   return (
     <S.Cards>
       <S.Card>
-        <S.CardHeader>
-          <S.CardProfileImage>
-            <img src={profileImg} alt="" />
-          </S.CardProfileImage>
-          <S.CardProfileInformation>
-            <S.CardProfileName>Hi, John</S.CardProfileName>
-            <S.CardProfileDate>Customer since 2020</S.CardProfileDate>
-          </S.CardProfileInformation>
-        </S.CardHeader>
+        {name ? (
+          <S.CardHeader>
+            <S.CardProfileImage src={userImage} alt="user image" />
+            <S.CardProfileInformation>
+              <S.CardProfileName>Hi, {name}</S.CardProfileName>
+              <S.CardProfileDate>Customer since {createdAt}</S.CardProfileDate>
+            </S.CardProfileInformation>
+          </S.CardHeader>
+        ) : (
+          <></>
+        )}
+
         <S.CardText>Top links for you</S.CardText>
         <S.CardBody>
           <S.CardBox>

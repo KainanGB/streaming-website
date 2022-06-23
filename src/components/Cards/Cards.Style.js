@@ -32,7 +32,9 @@ export const CardHeader = styled.div`
   height: 5rem;
 `;
 
-export const CardProfileImage = styled.div``;
+export const CardProfileImage = styled.img`
+  width: 5rem;
+`;
 
 export const CardProfileInformation = styled.div`
   margin-left: 1em;

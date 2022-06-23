@@ -1,13 +1,13 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import {
-  GoogleAuthProvider,
   getAuth,
+  GoogleAuthProvider,
   signInWithPopup,
+  signOut,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
+  deleteUser,
 } from "firebase/auth";
 
 import {
@@ -19,11 +19,6 @@ import {
   addDoc,
 } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDtmAvDv42gtGPAoGfYyAiqOGWgWB3gqpc",
   authDomain: "study-clone-80583.firebaseapp.com",
@@ -34,19 +29,21 @@ const firebaseConfig = {
   measurementId: "G-3SZLWTXE0Q",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-//const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
 const googleProvider = new GoogleAuthProvider();
+
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
+
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
+
     if (docs.docs.length === 0) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
@@ -61,51 +58,69 @@ const signInWithGoogle = async () => {
   }
 };
 
-const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-const registerWithEmailAndPassword = async (name, email, password) => {
+const createUserWithEmail = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
+    console.log(user);
+
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const docs = await getDocs(q);
+
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: name,
+        authProvider: "google",
+        email: email,
+      });
+    }
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
 };
 
-const sendPasswordReset = async (email) => {
+const signUpWithEmail = async (email, password) => {
   try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    console.log(user);
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const docs = await getDocs(q);
+
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.name,
+        authProvider: "google",
+        email: email,
+      });
+    }
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
+};
+
+const deleteUserFromWebsite = (user) => {
+  deleteUser(user).then(() => {
+    console.log(user + "foi deletado");
+  });
 };
 
 const logout = () => {
-  signOut(auth);
+  return signOut(auth)
+    .then(() => {
+      console.log("saiu");
+    })
+    .catch((error) => console.error(error));
 };
 
 export {
-  auth,
-  db,
   signInWithGoogle,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  sendPasswordReset,
   logout,
+  db,
+  auth,
+  createUserWithEmail,
+  signUpWithEmail,
+  deleteUserFromWebsite,
 };

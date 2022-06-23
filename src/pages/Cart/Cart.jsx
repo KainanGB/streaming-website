@@ -1,13 +1,24 @@
 import { Navbar } from "../../components/Navbar";
 import { useCart } from "../../hooks/useCart";
+import { useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
 import * as S from "./Cart.Style";
 import axios from "axios";
 
 import img from "../../assets/boxes-img.png";
-import { useEffect } from "react";
 
 export const Cart = () => {
   const { cart, removeProduct, removeAllProducts } = useCart();
+  const { user, loading, error } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
+  }, [user, loading]);
 
   const total = cart.reduce((acc, currentValue) => {
     const total = currentValue.price * currentValue.amount;

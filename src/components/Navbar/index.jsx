@@ -1,5 +1,5 @@
 import * as S from "./NavBar.Style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import amazonLogo from "../../assets/amazon-logo.svg";
 import cartImage from "../../assets/cart.svg";
@@ -7,9 +7,23 @@ import { FaSearchLocation as IconLocation } from "react-icons/fa";
 
 import { MdSearch as IconSearch } from "react-icons/md";
 import { useCart } from "../../hooks/useCart.jsx";
+import { logout } from "../../server/firebase";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
 
 export function Navbar() {
   const { cart } = useCart();
+  const { user, loading, error, name, fetchUserName, deleteUserFromWebsite } =
+    useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading) return;
+
+    fetchUserName();
+
+    if (!user) navigate("/");
+  }, [user, loading]);
 
   return (
     <S.Navbar>
@@ -19,11 +33,9 @@ export function Navbar() {
         </Link>
         <S.Location>
           <IconLocation size={18} />
-          <span>
-            Enviar para
-            <br />
-            <b>08454564</b>
-          </span>
+          <button onClick={() => deleteUserFromWebsite(user)}>
+            deleta ai amigo, por favor.
+          </button>
         </S.Location>
         <S.SearchBar>
           <S.SearchInput placeholder="Search.." name="search" />
@@ -31,13 +43,17 @@ export function Navbar() {
             <IconSearch size={27} />
           </S.SearchButton>
         </S.SearchBar>
-        <S.Login>Login</S.Login>
+        <S.Login>
+          Bem vindo <br />
+          {user ? name : "undefined"}
+        </S.Login>
         <Link to="/cart">
           <S.Cart image={cartImage}>
             <span>{cart.length}</span>
             <span>Cart</span>
           </S.Cart>
         </Link>
+        <S.SignOutButton onClick={logout}>logout</S.SignOutButton>
       </S.TopHeader>
       <S.Header>
         <Link to="/products">

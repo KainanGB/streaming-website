@@ -171,3 +171,10 @@ export const HeaderMenu = styled.div`
 export const Link = styled.a``;
 
 export const LinkMenu = styled.div``;
+
+export const SignOutButton = styled.button`
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: ${pallete.primaryClrWhite};
+`;
