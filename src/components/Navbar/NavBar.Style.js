@@ -4,6 +4,25 @@ import * as pallete from "../../global/variables";
 export const Navbar = styled.nav`
   background-color: ${pallete.secondaryClrDarkBlack};
   /*padding-top: 1em;*/
+
+  & .dropdown-toggle {
+    margin: 0 1rem;
+    background: transparent;
+    border: none;
+
+    a {
+      position: relative;
+    }
+    &::after {
+      position: relative;
+      right: 0.7rem;
+      top: 0.2rem;
+    }
+  }
+
+  & .dropdown-menu {
+    min-width: 13rem;
+  }
 `;
 
 export const TopHeader = styled.header`
@@ -88,7 +107,7 @@ export const SearchButton = styled.button`
   }
 `;
 
-export const Login = styled.button`
+export const Login = styled.a`
   background-color: transparent;
   color: ${pallete.primaryClrWhite};
   font-weight: bold;
@@ -102,13 +121,8 @@ export const Login = styled.button`
 `;
 
 export const Cart = styled.div`
-  background-image: url(${(props) => props.image});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left;
   display: flex;
   width: 5rem;
-  height: 2rem;
 
   position: relative;
 
@@ -121,21 +135,25 @@ export const Cart = styled.div`
 
   cursor: pointer;
 
-  span:first-child {
+  & .span {
     position: relative;
-    left: 0.75rem;
-    bottom: 0.3rem;
+    right: 1.4rem;
+
+    bottom: 0.5rem;
     font-size: 1.1rem;
+
     color: ${pallete.primaryClrOrange};
   }
 
   span + span {
     position: relative;
-    left: 1.3rem;
+    /*left: 1.3rem;*/
     bottom: 0rem;
     top: 0.45rem;
   }
 `;
+
+export const CartImage = styled.img``;
 
 export const Header = styled.header`
   display: flex;
@@ -172,7 +190,7 @@ export const Link = styled.a``;
 
 export const LinkMenu = styled.div``;
 
-export const SignOutButton = styled.button`
+export const SignOutButton = styled.a`
   cursor: pointer;
   background: transparent;
   border: none;

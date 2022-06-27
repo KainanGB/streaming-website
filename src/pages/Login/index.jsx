@@ -22,7 +22,7 @@ export const Login = () => {
   useEffect(() => {
     if (loading) return;
 
-    if (user) navigate("/home");
+    if (user) navigate("/");
   }, [user, loading]);
 
   const onSubmit = ({ email, password }) => {
@@ -54,7 +54,7 @@ export const Login = () => {
         </S.GoogleSubmitButton>
 
         <S.RegisterLink>
-          Não tem uma conta? Se <Link to="register">inscreva</Link>
+          Não tem uma conta? Se <Link to="/register">inscreva</Link>
         </S.RegisterLink>
       </S.LoginForm>
     </S.Container>

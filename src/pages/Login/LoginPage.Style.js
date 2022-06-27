@@ -105,7 +105,7 @@ export const Logo = styled.img`
   cursor: pointer;
 `;
 
-export const GoogleSubmitButton = styled.button`
+export const GoogleSubmitButton = styled.a`
   display: flex;
   align-items: center;
   border: none;

@@ -28,6 +28,15 @@ export function CartProvider({ children }) {
     setCart(newProductArray);
   }
 
+  function updateCartAmount(productId, qtt) {
+    const updatedCart = [...cart];
+    const findIndex = updatedCart.findIndex((product) => {
+      return product.id === productId;
+    });
+    updatedCart[findIndex].amount = qtt;
+    setCart(updatedCart);
+  }
+
   function removeProduct(productId) {
     const updatedCart = [...cart];
 
@@ -55,7 +64,13 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, addProduct, removeProduct, removeAllProducts }}
+      value={{
+        cart,
+        addProduct,
+        removeProduct,
+        removeAllProducts,
+        updateCartAmount,
+      }}
     >
       {children}
     </CartContext.Provider>

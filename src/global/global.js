@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
 import * as pallete from "./variables";
 
 export default createGlobalStyle`

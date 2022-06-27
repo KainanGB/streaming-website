@@ -7,22 +7,40 @@ import { FaSearchLocation as IconLocation } from "react-icons/fa";
 
 import { MdSearch as IconSearch } from "react-icons/md";
 import { useCart } from "../../hooks/useCart.jsx";
-import { logout } from "../../server/firebase";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
 
 export function Navbar() {
   const { cart } = useCart();
-  const { user, loading, error, name, fetchUserName, deleteUserFromWebsite } =
-    useAuth();
+  const {
+    user,
+    loading,
+    error,
+    name,
+    fetchUserName,
+    deleteUserFromWebsite,
+    logout,
+  } = useAuth();
+
   const navigate = useNavigate();
+  const [dropdownOpen, setdropdownOpen] = useState(false);
+  //const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setdropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
     if (loading) return;
 
     fetchUserName();
 
-    if (!user) navigate("/");
+    //if (!user) navigate("/");
   }, [user, loading]);
 
   return (
@@ -33,9 +51,6 @@ export function Navbar() {
         </Link>
         <S.Location>
           <IconLocation size={18} />
-          <button onClick={() => deleteUserFromWebsite(user)}>
-            deleta ai amigo, por favor.
-          </button>
         </S.Location>
         <S.SearchBar>
           <S.SearchInput placeholder="Search.." name="search" />
@@ -43,17 +58,53 @@ export function Navbar() {
             <IconSearch size={27} />
           </S.SearchButton>
         </S.SearchBar>
-        <S.Login>
-          Bem vindo <br />
-          {user ? name : "undefined"}
-        </S.Login>
+
+        <Dropdown
+          isOpen={dropdownOpen}
+          onMouseEnter={toggle}
+          onMouseLeave={toggle}
+          toggle={toggle}
+        >
+          <DropdownToggle caret className="dropdown-toggle">
+            {user ? (
+              <S.Login>Olá, {name}</S.Login>
+            ) : (
+              <S.SignOutButton onClick={() => navigate("/login")}>
+                Olá, faça seu login
+              </S.SignOutButton>
+            )}
+          </DropdownToggle>
+          <DropdownMenu dark isOpen={toggle}>
+            {user ? (
+              <DropdownItem onClick={logout}>
+                <S.SignOutButton>Sair</S.SignOutButton>
+              </DropdownItem>
+            ) : (
+              <DropdownItem onClick={() => navigate("/login")}>
+                <S.SignOutButton>Entrar </S.SignOutButton>
+              </DropdownItem>
+            )}
+
+            <DropdownItem onClick={() => navigate("/cart")}>
+              Seus pedidos
+            </DropdownItem>
+            {/*<DropdownItem text>Dropdown Item Text</DropdownItem>*/}
+            {/*<DropdownItem disabled>Action (disabled)</DropdownItem>*/}
+            <DropdownItem>Minha conta</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem onClick={() => deleteUserFromWebsite(user)}>
+              Deletar conta
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+
         <Link to="/cart">
-          <S.Cart image={cartImage}>
-            <span>{cart.length}</span>
+          <S.Cart>
+            <S.CartImage src={cartImage} />
+            <span className="span">{cart.length}</span>
             <span>Cart</span>
           </S.Cart>
         </Link>
-        <S.SignOutButton onClick={logout}>logout</S.SignOutButton>
       </S.TopHeader>
       <S.Header>
         <Link to="/products">

@@ -14,7 +14,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
+    //if (!user) return navigate("/");
   }, [user, loading]);
 
   return (

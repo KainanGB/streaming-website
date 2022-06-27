@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { FaGoogle } from "react-icons/fa";
 
-import { signInWithGoogle } from "../../server/firebase";
 import { useAuth } from "../../hooks/useAuth";
 
 import "./Register.Style.css";
@@ -12,8 +11,14 @@ function Register() {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
-  const { user, loading, error, fetchUserName, createUserWithEmail } =
-    useAuth();
+  const {
+    user,
+    loading,
+    error,
+    fetchUserName,
+    createUserWithEmail,
+    signInWithGoogle,
+  } = useAuth();
 
   const navigate = useNavigate();
 
