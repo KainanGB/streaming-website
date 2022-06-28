@@ -10,14 +10,14 @@ import fashionImg from "../../assets/fashion-img.png";
 import { useAuth } from "../../hooks/useAuth";
 
 export const Cards = () => {
-  const { name, createdAt, userImage } = useAuth();
+  const { name, createdAt } = useAuth();
 
   return (
     <S.Cards>
       <S.Card>
         {name ? (
           <S.CardHeader>
-            <S.CardProfileImage src={userImage} alt="user image" />
+            {/*<S.CardProfileImage alt="user image" />*/}
             <S.CardProfileInformation>
               <S.CardProfileName>Hi, {name}</S.CardProfileName>
               <S.CardProfileDate>Customer since {createdAt}</S.CardProfileDate>

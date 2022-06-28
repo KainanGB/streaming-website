@@ -87,14 +87,6 @@ export function Register() {
           placeholder="Senha"
           {...register("password", {
             required: true,
-            minLength: {
-              value: 2,
-              message: "Informe uma senha maior que 2 letras ou números",
-            },
-            maxLength: {
-              value: 20,
-              message: "Informe uma senha menor que 20 letras ou números",
-            },
           })}
         />
         <S.SubmitButton>Registrar</S.SubmitButton>

@@ -14,6 +14,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   deleteUser,
+  debugErrorMap,
 } from "firebase/auth";
 
 import {
@@ -25,6 +26,7 @@ import {
   addDoc,
   arrayUnion,
 } from "firebase/firestore";
+
 import { useEffect } from "react";
 
 const firebaseConfig = {
@@ -114,7 +116,16 @@ export function AuthProvider({ children }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      switch (err.code) {
+        case "auth/weak-password":
+          toast.error("Sua senha precisa conter pelo menos 6 caracteres");
+          break;
+        case "auth/email-already-in-use":
+          toast.error("Email já cadastrado");
+          break;
+        default:
+          null;
+      }
     }
   };
 
@@ -122,12 +133,12 @@ export function AuthProvider({ children }) {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      console.log(auth);
 
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
 
       if (docs.docs.length === 0) {
+        console.log(docs.docs);
         await addDoc(collection(db, "users"), {
           uid: user.uid,
           name: user.name,
