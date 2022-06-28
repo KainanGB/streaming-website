@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import amazonLogo from "../../assets/amazon-logo.svg";
 import cartImage from "../../assets/cart.svg";
-import { FaSearchLocation as IconLocation } from "react-icons/fa";
 
 import { MdSearch as IconSearch } from "react-icons/md";
 import { useCart } from "../../hooks/useCart.jsx";
@@ -45,9 +44,6 @@ export function Navbar() {
         <Link to="/">
           <S.Logo image={amazonLogo}>.com.br</S.Logo>
         </Link>
-        <S.Location>
-          <IconLocation size={18} />
-        </S.Location>
         <S.SearchBar>
           <S.SearchInput placeholder="Search.." name="search" />
           <S.SearchButton type="submit">
@@ -70,35 +66,37 @@ export function Navbar() {
               </S.SignOutButton>
             )}
           </DropdownToggle>
-          <DropdownMenu dark isOpen={toggle}>
-            {user ? (
-              <DropdownItem onClick={logout}>
-                <S.SignOutButton>Sair</S.SignOutButton>
-              </DropdownItem>
-            ) : (
-              <DropdownItem onClick={() => navigate("/login")}>
-                <S.SignOutButton>Entrar </S.SignOutButton>
-              </DropdownItem>
-            )}
+          {user ? (
+            <DropdownMenu dark isOpen={toggle}>
+              {user ? (
+                <DropdownItem onClick={logout}>
+                  <S.SignOutButton>Sair</S.SignOutButton>
+                </DropdownItem>
+              ) : (
+                <DropdownItem onClick={() => navigate("/login")}>
+                  <S.SignOutButton>Entrar </S.SignOutButton>
+                </DropdownItem>
+              )}
 
-            <DropdownItem onClick={() => navigate("/cart")}>
-              Seus pedidos
-            </DropdownItem>
-            {/*<DropdownItem text>Dropdown Item Text</DropdownItem>*/}
-            {/*<DropdownItem disabled>Action (disabled)</DropdownItem>*/}
-            <DropdownItem>Minha conta</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem onClick={() => deleteUserFromWebsite(user)}>
-              Deletar conta
-            </DropdownItem>
-          </DropdownMenu>
+              <DropdownItem onClick={() => navigate("/cart")}>
+                Seus pedidos
+              </DropdownItem>
+              <DropdownItem>Minha conta</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem onClick={() => deleteUserFromWebsite(user)}>
+                Deletar conta
+              </DropdownItem>
+            </DropdownMenu>
+          ) : (
+            ""
+          )}
         </Dropdown>
 
         <Link to="/cart">
           <S.Cart>
             <S.CartImage src={cartImage} />
             <span className="span">{cart.length}</span>
-            <span>Cart</span>
+            <span>Carrinho</span>
           </S.Cart>
         </Link>
       </S.TopHeader>

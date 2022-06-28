@@ -3,25 +3,31 @@ import * as pallete from "../../global/variables";
 
 export const Navbar = styled.nav`
   background-color: ${pallete.secondaryClrDarkBlack};
-  /*padding-top: 1em;*/
 
-  & .dropdown-toggle {
-    margin: 0 1rem;
-    background: transparent;
-    border: none;
+  & .dropdown {
+    margin: 0 1em 0 0;
 
-    a {
-      position: relative;
+    & .dropdown-toggle {
+      padding: 0.3281em 0;
+      /*background: transparent;*/
+      border: none;
+      width: 10rem;
+      &:hover {
+        border: 0.1px solid ${pallete.primaryClrWhite};
+      }
+      a {
+        position: relative;
+      }
+      &::after {
+        position: relative;
+        right: 0rem;
+        top: 0.2rem;
+      }
     }
-    &::after {
-      position: relative;
-      right: 0.7rem;
-      top: 0.2rem;
-    }
-  }
 
-  & .dropdown-menu {
-    min-width: 13rem;
+    & .dropdown-menu {
+      min-width: 5rem;
+    }
   }
 `;
 
@@ -56,29 +62,12 @@ export const Logo = styled.div`
   }
 `;
 
-export const Location = styled.a`
-  display: flex;
-  align-items: center;
-  /*flex-direction: column;*/
-  padding: 0 0.5em;
-  border: 0.1px solid transparent;
-  margin: 0 1em;
-  text-align: center;
-
-  cursor: pointer;
-
-  span {
-    margin-left: 0.5em;
-  }
-  &:hover {
-    border: 0.1px solid ${pallete.primaryClrWhite};
-  }
-`;
-
 export const SearchBar = styled.form`
   display: flex;
   height: 2.5em;
   flex: 1;
+  margin: 0 1em;
+  min-width: 50%;
 
   border-radius: 0.3em;
   overflow: hidden;
@@ -99,7 +88,7 @@ export const SearchInput = styled.input`
 
 export const SearchButton = styled.button`
   border: none;
-  padding: 0.4em 1em 0 1em;
+  padding: 0.2em 1em 0 1em;
   background-color: ${pallete.secondaryClrYellow};
   cursor: pointer;
   svg {
@@ -115,19 +104,14 @@ export const Login = styled.a`
 
   cursor: pointer;
   border: 0.1px solid transparent;
-  &:hover {
-    border: 0.1px solid ${pallete.primaryClrWhite};
-  }
 `;
 
 export const Cart = styled.div`
   display: flex;
-  width: 5rem;
-
   position: relative;
-
   font-weight: bold;
   border: 0.1px solid transparent;
+  width: 7rem;
 
   &:hover {
     border: 0.1px solid ${pallete.primaryClrWhite};
