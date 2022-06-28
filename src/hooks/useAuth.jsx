@@ -1,4 +1,7 @@
 import { createContext, useContext, useState } from "react";
+import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { initializeApp } from "firebase/app";
@@ -20,7 +23,9 @@ import {
   collection,
   where,
   addDoc,
+  arrayUnion,
 } from "firebase/firestore";
+import { useEffect } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDtmAvDv42gtGPAoGfYyAiqOGWgWB3gqpc",
@@ -42,10 +47,9 @@ const googleProvider = new GoogleAuthProvider();
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [name, setName] = useState();
   const [createdAt, setCreatedAt] = useState();
-  const [userImage, setUserImage] = useState();
 
   const fetchUserName = async () => {
     if (user) {
@@ -54,15 +58,11 @@ export function AuthProvider({ children }) {
         const doc = await getDocs(q);
 
         const data = doc.docs[0].data();
-        const dataUserImage =
-          doc.docs[0]._firestore._authCredentials.auth.auth.currentUser
-            .providerData[0].photoURL;
 
         const date =
           doc.docs[0]._firestore._authCredentials.auth.auth.currentUser.metadata
             .creationTime;
 
-        setUserImage(dataUserImage);
         setCreatedAt(date);
         setName(data.name.split(" ")[0]);
       } catch (err) {
@@ -90,7 +90,6 @@ export function AuthProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-      alert(err.message);
     }
   };
 
@@ -123,6 +122,7 @@ export function AuthProvider({ children }) {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       const user = res.user;
+      console.log(auth);
 
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
@@ -136,35 +136,43 @@ export function AuthProvider({ children }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      if (err.code === "auth/user-not-found")
+        toast.error("Usuário não encontrado ou não registrado");
     }
   };
 
   const deleteUserFromWebsite = (user) => {
-    deleteUser(user).then(() => {
-      console.log(user + "foi deletado");
-    });
+    deleteUser(user)
+      .then(() => {
+        console.log(user + "foi deletado");
+      })
+      .catch((err) => console.error(err));
   };
 
   const logout = () => {
     return signOut(auth)
       .then(() => {
-        console.log("saiu");
+        console.log(user + "saiu");
       })
       .catch((error) => console.error(error));
   };
+
+  useEffect(() => {
+    const getRootElement = document.querySelector("#root");
+    loading
+      ? (getRootElement.style.filter = "brightness(0.7)")
+      : (getRootElement.style.filter = "");
+  }, [loading, user]);
 
   return (
     <AuthContext.Provider
       value={{
         user,
         loading,
-        error,
         name,
         fetchUserName,
         signInWithGoogle,
         createdAt,
-        userImage,
         createUserWithEmail,
         signUpWithEmail,
         deleteUserFromWebsite,
@@ -181,3 +189,7 @@ export function useAuth() {
 
   return context;
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.object,
+};

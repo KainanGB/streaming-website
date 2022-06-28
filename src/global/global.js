@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import * as pallete from "./variables";
 
 export default createGlobalStyle`
@@ -47,30 +49,27 @@ export default createGlobalStyle`
     
   }
 
-  .loader {
+  .loading {
+    position: absolute;
+    top: calc(50% - 8em);
+    left: calc(50% - 7em);
+    width: 15rem;
+    height: 15rem;
+
+
+  }
+
+
+
+ .loading--hide {
   position: absolute;
-  top: calc(50% - 4em);
-  left: calc(50% - 4em);
-  width: 6em;
-  height: 6em;
-  border: 1.1em solid rgba(0, 0, 0, 0.2);
-  border-left: 1.1em solid #000000;
-  border-radius: 50%;
-  animation: load8 1.1s infinite linear;
-  transition: opacity 0.3s;
+  top: calc(50% - 8em);
+  left: calc(50% - 7em);
+  width: 15rem;
+  height: 15rem;
+  display:none;
 }
 
-.loader--hide {
-  opacity: 0;
-}
 
-@keyframes load8 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
   `;

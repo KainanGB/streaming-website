@@ -73,7 +73,6 @@ export const Cart = () => {
             ({ name, description, price, rating, amount, id }, index) => {
               return (
                 <>
-                  <hr />
                   <S.ProductCard key={id}>
                     <S.ProductInformation>
                       <S.ProductImage src={img} />
@@ -165,7 +164,9 @@ export const Cart = () => {
             Seu pedido se qualifica para Frete GRÁTIS. Selecione Frete GRÁTIS ao
             finalizar o pedido. Veja detalhes.
           </S.CartContentTitle>
-          <S.CartSubTotal>{PricingFormat(total)}</S.CartSubTotal>
+          <S.CartSubTotal>
+            Subtotal ({cart.length} itens): {PricingFormat(total)}
+          </S.CartSubTotal>
           <S.CartSubmitBuyButton onClick={checkIfIsloggedIn}>
             Fechar pedido
           </S.CartSubmitBuyButton>

@@ -36,11 +36,7 @@ export function Navbar() {
   const toggle = () => setdropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
-    if (loading) return;
-
-    fetchUserName();
-
-    //if (!user) navigate("/");
+    if (!loading) fetchUserName();
   }, [user, loading]);
 
   return (

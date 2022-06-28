@@ -16,7 +16,7 @@ export const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { user, loading, error, signInWithGoogle, signUpWithEmail } = useAuth();
+  const { user, loading, signInWithGoogle, signUpWithEmail } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +33,6 @@ export const Login = () => {
     console.log(err, e);
   };
 
-  //console.log(errors);
-
   return (
     <S.Container>
       <S.Logo src={amazonLogo} />
@@ -46,13 +44,11 @@ export const Login = () => {
           <S.FormText>Esqueci a senha</S.FormText>
         </S.FormDiv>
         <S.FormPasswordInput {...register("password")} />
-        {errors.password && <span>{errors.password.message}</span>}
         <S.SubmitButton />
         <S.GoogleSubmitButton onClick={signInWithGoogle}>
           <FaGoogle color="white" />
           <S.FormText>Sign in with Google</S.FormText>
         </S.GoogleSubmitButton>
-
         <S.RegisterLink>
           Não tem uma conta? Se <Link to="/register">inscreva</Link>
         </S.RegisterLink>

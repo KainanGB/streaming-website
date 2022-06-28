@@ -7,19 +7,23 @@ import heroImage from "../../assets/hero.jpg";
 import * as S from "./HomePage.Style";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { Spinner } from "reactstrap";
 
 export const HomePage = () => {
   const { user, loading, error } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loading) return;
-    //if (!user) return navigate("/");
-  }, [user, loading]);
+  useEffect(() => {}, [user, loading]);
 
   return (
     <>
       <Navbar />
+
+      <Spinner
+        color="black"
+        className={loading ? "loading" : "loading--hide"}
+      ></Spinner>
+
       <S.HeroContent image={heroImage}>
         <Cards />
       </S.HeroContent>

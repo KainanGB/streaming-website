@@ -1,6 +1,8 @@
 export const primaryClrBlack = "#000000";
 export const primaryClrWhite = "#FFFFFF";
 export const primaryClrOrange = "#F19D38";
+export const primaryClrYellow = "#FFD814";
+export const borderColor = "#FCD200";
 
 export const secondaryClrDarkBlack = "#141920";
 export const secondaryClrMedium = "#252F3D";

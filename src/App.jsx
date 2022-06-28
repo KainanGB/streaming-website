@@ -1,20 +1,23 @@
-import { HomePage } from "./pages/Home/HomePage";
-import { ProductList } from "./pages/Products/ProductsList";
-import { Routes, Route } from "react-router-dom";
-import { Cart } from "./pages/Cart/Cart";
-import { Login } from "./pages/Login";
-import Register from "./components/Register";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
+
+import { Routes } from "./routes";
+import { CartProvider } from "./hooks/useCart";
+
+import GlobalCSS from "./global/global";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./hooks/useAuth";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" exact element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/products" element={<ProductList />} />
-      <Route path="/cart" element={<Cart />} />
-    </Routes>
+    <BrowserRouter>
+      <AuthProvider>
+        <CartProvider>
+          <GlobalCSS />
+          <ToastContainer autoClose={3000} />
+          <Routes />
+        </CartProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

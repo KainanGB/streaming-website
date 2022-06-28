@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const CartContext = createContext({});
 
@@ -81,3 +82,7 @@ export function useCart() {
   const context = useContext(CartContext);
   return context;
 }
+
+CartProvider.propTypes = {
+  children: PropTypes.array,
+};
