@@ -14,11 +14,11 @@ export const ProductList = () => {
   const { user, loading, error } = useAuth();
 
   useEffect(() => {
-    if (!loading)
-      axios.get("http://localhost:3000/products").then((response) => {
-        const data = response.data.products;
-        setProducts(data);
-      });
+    if (!loading) return;
+    //axios.get("http://localhost:3000/products").then((response) => {
+    //  const data = response.data.products;
+    //  setProducts(data);
+    //});
   }, [user, loading]);
 
   const handleAddProduct = (id, data) => {

@@ -22,8 +22,8 @@ export function Navbar() {
     user,
     loading,
     error,
-    name,
-    fetchUserName,
+    fetchUserData,
+    userData,
     deleteUserFromWebsite,
     logout,
   } = useAuth();
@@ -35,7 +35,7 @@ export function Navbar() {
   const toggle = () => setdropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
-    if (!loading) fetchUserName();
+    if (!loading) fetchUserData();
   }, [user, loading]);
 
   return (
@@ -59,7 +59,7 @@ export function Navbar() {
         >
           <DropdownToggle caret className="dropdown-toggle">
             {user ? (
-              <S.Login>Olá, {name}</S.Login>
+              <S.Login>Olá, {userData.name}</S.Login>
             ) : (
               <S.SignOutButton onClick={() => navigate("/login")}>
                 Olá, faça seu login

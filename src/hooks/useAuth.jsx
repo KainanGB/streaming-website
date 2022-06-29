@@ -25,6 +25,8 @@ import {
   where,
   addDoc,
   arrayUnion,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 import { useEffect } from "react";
@@ -50,28 +52,21 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, loading] = useAuthState(auth);
-  const [name, setName] = useState();
-  const [createdAt, setCreatedAt] = useState();
+  const [userData, setUserData] = useState({});
 
-  const fetchUserName = async () => {
+  const fetchUserData = async () => {
     if (user) {
       try {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
-
         const data = doc.docs[0].data();
 
-        const date =
-          doc.docs[0]._firestore._authCredentials.auth.auth.currentUser.metadata
-            .creationTime;
-
-        setCreatedAt(date);
-        setName(data.name.split(" ")[0]);
+        setUserData({ ...data, name: data.name.split(" ")[0] });
       } catch (err) {
-        console.error(err);
-        alert("An error occured while fetching user data");
+        console.log(err.code);
+        console.log(err.message);
       }
-    } else console.log("DEU B.O");
+    }
   };
 
   const signInWithGoogle = async () => {
@@ -100,20 +95,19 @@ export function AuthProvider({ children }) {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
 
-      console.log(user);
-
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
 
-      console.log(docs);
-
       if (docs.docs.length === 0) {
-        await addDoc(collection(db, "users"), {
+        const userInfo = await addDoc(collection(db, "users"), {
           uid: user.uid,
           name: name,
           authProvider: "google",
           email: email,
+          createdAt: user.metadata.createdAt,
         });
+
+        console.log(userInfo.id);
       }
     } catch (err) {
       switch (err.code) {
@@ -152,20 +146,20 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const deleteUserFromWebsite = (user) => {
-    deleteUser(user)
-      .then(() => {
-        console.log(user + "foi deletado");
-      })
-      .catch((err) => console.error(err));
+  const deleteUserFromWebsite = async (user) => {
+    try {
+      const res = await deleteUser(user);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const logout = () => {
-    return signOut(auth)
-      .then(() => {
-        console.log(user + "saiu");
-      })
-      .catch((error) => console.error(error));
+  const logout = async () => {
+    try {
+      const res = await signOut(auth);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -179,11 +173,10 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        userData,
         loading,
-        name,
-        fetchUserName,
+        fetchUserData,
         signInWithGoogle,
-        createdAt,
         createUserWithEmail,
         signUpWithEmail,
         deleteUserFromWebsite,
