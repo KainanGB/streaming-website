@@ -106,8 +106,6 @@ export function AuthProvider({ children }) {
           email: email,
           createdAt: user.metadata.createdAt,
         });
-
-        console.log(userInfo.id);
       }
     } catch (err) {
       switch (err.code) {

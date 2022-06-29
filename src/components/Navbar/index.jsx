@@ -67,7 +67,7 @@ export function Navbar() {
             )}
           </DropdownToggle>
           {user ? (
-            <DropdownMenu dark isOpen={toggle}>
+            <DropdownMenu dark>
               {user ? (
                 <DropdownItem onClick={logout}>
                   <S.SignOutButton>Sair</S.SignOutButton>
