@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as S from "./LoginPage.Style";
 import amazonLogo from "../../assets/amazon_logo-black.svg";
 
-import { FaGoogle } from "react-icons/fa";
+import { AiFillGoogleCircle } from "react-icons/ai";
 import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
@@ -46,7 +46,7 @@ export const Login = () => {
         <S.FormPasswordInput {...register("password")} />
         <S.SubmitButton />
         <S.GoogleSubmitButton onClick={signInWithGoogle}>
-          <FaGoogle color="white" />
+          <AiFillGoogleCircle />
           <S.FormText>Sign in with Google</S.FormText>
         </S.GoogleSubmitButton>
         <S.RegisterLink>

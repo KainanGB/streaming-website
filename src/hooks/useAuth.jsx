@@ -60,6 +60,7 @@ export function AuthProvider({ children }) {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const data = doc.docs[0].data();
+        if (!data) window.location.reload();
 
         setUserData({ ...data, name: data.name.split(" ")[0] });
       } catch (err) {
@@ -106,8 +107,12 @@ export function AuthProvider({ children }) {
           email: email,
           createdAt: user.metadata.createdAt,
         });
+        if (userInfo) {
+          toast.success("Usuário criado com sucesso");
+        }
       }
     } catch (err) {
+      console.log(err.code);
       switch (err.code) {
         case "auth/weak-password":
           toast.error("Sua senha precisa conter pelo menos 6 caracteres");
@@ -147,6 +152,7 @@ export function AuthProvider({ children }) {
   const deleteUserFromWebsite = async (user) => {
     try {
       const res = await deleteUser(user);
+      toast.sucess("usuário deletado com sucesso");
     } catch (err) {
       console.log(err);
     }

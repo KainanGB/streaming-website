@@ -4,13 +4,13 @@ import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
+import amazonLogo from "../../assets/amazon_logo-black.svg";
 import * as S from "./Register.Style";
 import { FaGoogle } from "react-icons/fa";
 
 export function Register() {
   const [formError, setFormError] = useState("");
-  //const [password, setPassword] = useState("");
-  //const [userName, setUserName] = useState("");
+
   const {
     user,
     loading,
@@ -49,18 +49,17 @@ export function Register() {
   };
 
   const onError = (err, e) => {
-    const inputNameError = toast.error(errors.name?.message);
-    const inputEmailError = toast.error(errors.email?.message);
-    const inputPasswordError = toast.error(errors.password?.message);
-
-    return inputPasswordError == inputEmailError
-      ? inputPasswordError
-      : inputNameError;
+    toast.error(err.name?.message);
+    toast.error(err.email?.message);
+    toast.error(err.password?.message);
   };
 
   return (
     <S.Container>
+      <S.Logo src={amazonLogo} />
+
       <S.RegisterForm onSubmit={handleSubmit(onSubmit, onError)}>
+        <S.FormTitle>Criar conta</S.FormTitle>
         <S.UserInput
           placeholder="Nome Completo"
           {...register("name", {
@@ -92,9 +91,10 @@ export function Register() {
         <S.SubmitButton>Registrar</S.SubmitButton>
         <S.GoogleLogin onClick={signInWithGoogle}>
           <FaGoogle />
+          <S.FormText>Sign in with Google</S.FormText>
         </S.GoogleLogin>
         <S.LoginNavigate>
-          Already have an account? <Link to="/login">Login</Link> now.
+          Você já tem uma conta? <Link to="/login">Fazer login</Link>
         </S.LoginNavigate>
       </S.RegisterForm>
     </S.Container>

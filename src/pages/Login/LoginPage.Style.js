@@ -15,6 +15,7 @@ export const Container = styled.div`
   & input,
   button {
     margin: 0.5em 0;
+    width: 100%;
   }
 
   & input {
@@ -44,23 +45,18 @@ export const FormTitle = styled.h1`
 export const FormNameInput = styled.input.attrs({
   type: "text",
   name: "name",
-})`
-  width: 100%;
-`;
+})``;
 
 export const FormTextInput = styled.input.attrs({
   type: "text",
   name: "email",
-})`
-  width: 100%;
-`;
+})``;
 
 export const FormPasswordInput = styled.input.attrs({
   type: "password",
   name: "password",
 })`
   margin-top: 0.25rem !important;
-  width: 100%;
 `;
 
 export const FormDiv = styled.div`
@@ -110,18 +106,25 @@ export const GoogleSubmitButton = styled.a`
   align-items: center;
   border: none;
   padding: 0.5em;
+  margin: 0.5em 0;
 
   cursor: pointer;
 
   color: ${pallete.primaryClrWhite};
   background: #4285f4;
 
+  &:hover {
+    background: #4285f4;
+  }
+
   border-radius: 0.15rem;
   svg {
     width: 2rem;
   }
+  p {
+    margin: 0;
+    text-decoration: none;
+  }
 `;
 
-export const RegisterLink = styled.p`
-  text-align: right;
-`;
+export const RegisterLink = styled.p``;
