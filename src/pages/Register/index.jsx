@@ -56,8 +56,6 @@ export function Register() {
 
   return (
     <S.Container>
-      <S.Logo src={amazonLogo} />
-
       <S.RegisterForm onSubmit={handleSubmit(onSubmit, onError)}>
         <S.FormTitle>Criar conta</S.FormTitle>
         <S.UserInput

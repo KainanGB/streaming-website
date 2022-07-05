@@ -1,37 +1,65 @@
 import styled from "styled-components";
 import * as pallete from "../../global/variables";
 
+export const Background = styled.div`
+  background-image: url(${(props) => props.background});
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+`;
+
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  background-color: #fff;
-  color: #000;
+  color: ${pallete.primaryClrWhite};
 
   & input,
   button {
     margin: 0.5em 0;
     width: 100%;
+    color: ${pallete.primaryClrWhite};
   }
 
   & input {
-    padding: 0.3em 0;
+    padding: 0.3em 0.5em;
+    border-radius: 0.5rem;
+    border: none;
+    border: 1px solid #21242d;
+    background-color: #21242d;
+
+    /* Cor do background do google */
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px #21242d inset;
+    }
+
+    /* Cor do texto do autocomplete */
+    &:-webkit-autofill {
+      -webkit-text-fill-color: ${pallete.primaryClrWhite} !important;
+    }
+
+    padding: 0.8em;
+
+    :focus {
+      outline: none !important;
+      border: 1px solid white;
+    }
   }
 `;
 
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 400px;
   width: 100%;
   padding: 2em;
-  align-items: center;
+  background: #252933;
 
-  border: 1px solid ${pallete.darkGrey};
   border-radius: 0.5rem;
 
   position: relative;
@@ -56,6 +84,7 @@ export const FormPasswordInput = styled.input.attrs({
   type: "password",
   name: "password",
 })`
+  background: #21242d;
   margin-top: 0.25rem !important;
 `;
 
@@ -85,20 +114,17 @@ export const SubmitButton = styled.input.attrs({
   value: "Fazer login",
 })`
   padding: 0.5em;
-  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
   border-width: 1px;
-  border-color: #a88734 #9c7e31 #846a29;
-  color: ${pallete.primaryClrBlack};
   font-weight: bold;
   border-radius: 3px;
   width: 100%;
-`;
 
-export const Logo = styled.img`
-  width: 10rem;
-  padding: 1em 0;
+  background-color: #21242d !important;
+  transition: 1s background-color;
 
-  cursor: pointer;
+  :hover {
+    background: rgba(33, 36, 45, 0.5) !important;
+  }
 `;
 
 export const GoogleSubmitButton = styled.a`
