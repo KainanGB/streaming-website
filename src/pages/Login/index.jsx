@@ -22,7 +22,7 @@ export const Login = () => {
   useEffect(() => {
     if (loading) return;
 
-    if (user) navigate("/");
+    if (user) navigate("/home");
   }, [user, loading]);
 
   const onSubmit = ({ email, password }) => {

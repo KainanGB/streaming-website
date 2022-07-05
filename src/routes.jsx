@@ -9,10 +9,10 @@ import { Cart } from "../src/pages/Cart/Cart";
 export function Routes() {
   return (
     <Switch>
-      <Route path="/" exact element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" exact element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/products" element={<ProductList />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/animes" element={<ProductList />} />
       <Route path="/cart" element={<Cart />} />
     </Switch>
   );
