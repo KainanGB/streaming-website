@@ -16,17 +16,15 @@ export const HomePage = () => {
   useEffect(() => {}, [user, loading]);
 
   return (
-    <>
+    <S.Container>
       <Navbar />
-
       <Spinner
         color="black"
         className={loading ? "loading" : "loading--hide"}
       ></Spinner>
+      <h1>TÁ CONSTRUINDO AQUI CIDADÃO</h1>
 
-      <S.HeroContent image={heroImage}>
-        <Cards />
-      </S.HeroContent>
-    </>
+      {/*<Cards />*/}
+    </S.Container>
   );
 };

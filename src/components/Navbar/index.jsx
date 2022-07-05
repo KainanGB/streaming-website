@@ -29,17 +29,43 @@ export function Navbar() {
   } = useAuth();
 
   const navigate = useNavigate();
-  const [dropdownOpen, setdropdownOpen] = useState(false);
+  //const [dropdownOpen, setdropdownOpen] = useState(false);
   //const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setdropdownOpen((prevState) => !prevState);
+  //const toggle = () => setdropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
     if (!loading) fetchUserData();
   }, [user, loading]);
 
   return (
-    <S.Navbar>
+    <S.AsideBar>
+      <S.NavBar>
+        <S.Logo>
+          <h1>Aincrad</h1>
+        </S.Logo>
+        <S.NavList>
+          <S.NavTitle>Menu</S.NavTitle>
+          <S.NavItem>Home</S.NavItem>
+          <S.NavItem>Trending</S.NavItem>
+          <S.NavItem>Genre</S.NavItem>
+          <S.NavItem>Catalog</S.NavItem>
+          <S.NavTitle>My Library</S.NavTitle>
+          <S.NavItem>Recently</S.NavItem>
+          <S.NavItem>Favorites</S.NavItem>
+
+          <S.NavTitle>Setting</S.NavTitle>
+          <S.NavItem>Account</S.NavItem>
+
+          {user ? <S.LogoutButton onClick={logout}>Logout</S.LogoutButton> : ""}
+        </S.NavList>
+      </S.NavBar>
+    </S.AsideBar>
+  );
+}
+
+{
+  /*<S.Navbar>
       <S.TopHeader>
         <Link to="/">
           <S.Logo image={amazonLogo}>.com.br</S.Logo>
@@ -114,6 +140,5 @@ export function Navbar() {
         <S.Link>Computers</S.Link>
         <S.Link>Costumer Service</S.Link>
       </S.Header>
-    </S.Navbar>
-  );
+    </S.Navbar>*/
 }

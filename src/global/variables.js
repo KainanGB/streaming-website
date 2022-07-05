@@ -4,7 +4,10 @@ export const primaryClrOrange = "#F19D38";
 export const primaryClrYellow = "#FFD814";
 export const borderColor = "#FCD200";
 
-export const buttonHover = "rgba(33, 36, 45, 0.5) ";
+export const primaryClrGray = "#181a20";
+export const buttonHover = "rgba(33, 36, 45, 0.9) ";
+
+export const menuHover = "#21242d";
 
 export const secondaryClrDarkBlack = "#141920";
 export const secondaryClrMedium = "#252F3D";

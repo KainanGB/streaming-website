@@ -14,7 +14,7 @@ export default createGlobalStyle`
     font-family: "AmazonEmber_W_He", sans-serif;
 
     body {
-      background-color: ${pallete.darkGrey};
+      background-color: ${pallete.primaryClrGray};
       color: ${pallete.primaryClrWhite};
       /*min-height:100vh ;*/
     }
