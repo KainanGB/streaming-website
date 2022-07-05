@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as S from "./LoginPage.Style";
 import backgroundImage from "../../assets/aincrad.jpg";
 
-import { AiFillGoogleCircle } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
@@ -46,8 +46,7 @@ export const Login = () => {
           <S.FormPasswordInput {...register("password")} />
           <S.SubmitButton />
           <S.GoogleSubmitButton onClick={signInWithGoogle}>
-            <AiFillGoogleCircle />
-            <S.FormText>Sign in with Google</S.FormText>
+            <FcGoogle />
           </S.GoogleSubmitButton>
           <S.RegisterLink>
             Não tem uma conta? Se <Link to="/register">inscreva</Link>

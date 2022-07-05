@@ -27,7 +27,6 @@ export const Container = styled.div`
 
   & input {
     padding: 0.3em 0.5em;
-    border-radius: 0.5rem;
     border: none;
     border: 1px solid #21242d;
     background-color: #21242d;
@@ -119,37 +118,29 @@ export const SubmitButton = styled.input.attrs({
   border-radius: 3px;
   width: 100%;
 
-  background-color: #21242d !important;
   transition: 1s background-color;
 
   :hover {
-    background: rgba(33, 36, 45, 0.5) !important;
+    background: ${pallete.buttonHover}!important;
   }
 `;
 
 export const GoogleSubmitButton = styled.a`
   display: flex;
   align-items: center;
-  border: none;
-  padding: 0.5em;
-  margin: 0.5em 0;
 
+  background-color: #21242d;
+  border: none;
   cursor: pointer;
 
-  color: ${pallete.primaryClrWhite};
-  background: #4285f4;
+  padding: 1em;
+  border-radius: 1em;
+  margin: 0.5em 0;
+
+  transition: background-color 1s;
 
   &:hover {
-    background: #4285f4;
-  }
-
-  border-radius: 0.15rem;
-  svg {
-    width: 2rem;
-  }
-  p {
-    margin: 0;
-    text-decoration: none;
+    background: ${pallete.buttonHover};
   }
 `;
 

@@ -4,6 +4,8 @@ export const primaryClrOrange = "#F19D38";
 export const primaryClrYellow = "#FFD814";
 export const borderColor = "#FCD200";
 
+export const buttonHover = "rgba(33, 36, 45, 0.5) ";
+
 export const secondaryClrDarkBlack = "#141920";
 export const secondaryClrMedium = "#252F3D";
 export const secondaryClrBlue = "#007185";
