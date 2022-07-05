@@ -69,6 +69,32 @@ export const FormTitle = styled.h1`
   width: 100%;
 `;
 
+export const FormTextDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  background-color: #21242d;
+  padding-left: 0.5em;
+
+  svg {
+    margin-left: 0.5em;
+  }
+
+  .show-password {
+    height: 100%;
+    width: 1.5rem;
+    margin: 0 1em;
+
+    transition: transform 1s;
+
+    :hover {
+      transform: scale(1.3);
+      cursor: pointer;
+    }
+  }
+`;
+
 export const FormNameInput = styled.input.attrs({
   type: "text",
   name: "name",
@@ -79,19 +105,19 @@ export const FormTextInput = styled.input.attrs({
   name: "email",
 })``;
 
-export const FormPasswordInput = styled.input.attrs({
-  type: "password",
-  name: "password",
-})`
-  background: #21242d;
+export const FormPasswordInput = styled.input.attrs({})`
   margin-top: 0.25rem !important;
 `;
 
-export const FormDiv = styled.div`
+export const FormDivider = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 0.7rem;
   width: 100%;
+
+  p {
+    margin-bottom: 0.25em;
+  }
 `;
 
 export const FormText = styled.p`
@@ -119,8 +145,10 @@ export const SubmitButton = styled.input.attrs({
   width: 100%;
 
   transition: 1s background-color;
+  transition: 1s transform;
 
   :hover {
+    transform: scale(1.03);
     background: ${pallete.buttonHover}!important;
   }
 `;
@@ -138,8 +166,10 @@ export const GoogleSubmitButton = styled.a`
   margin: 0.5em 0;
 
   transition: background-color 1s;
+  transition: 1s transform;
 
   &:hover {
+    transform: scale(1.03);
     background: ${pallete.buttonHover};
   }
 `;

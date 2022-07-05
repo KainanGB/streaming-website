@@ -4,9 +4,10 @@ import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import amazonLogo from "../../assets/amazon_logo-black.svg";
+import backgroundImage from "../../assets/aincrad.jpg";
+import { FcGoogle } from "react-icons/fc";
+
 import * as S from "./Register.Style";
-import { FaGoogle } from "react-icons/fa";
 
 export function Register() {
   const [formError, setFormError] = useState("");
@@ -55,46 +56,44 @@ export function Register() {
   };
 
   return (
-    <S.Container>
-      <S.RegisterForm onSubmit={handleSubmit(onSubmit, onError)}>
-        <S.FormTitle>Criar conta</S.FormTitle>
-        <S.UserInput
-          placeholder="Nome Completo"
-          {...register("name", {
-            required: "Informe o nome completo",
-            minLength: {
-              value: 2,
-              message: "Informe o nome completo",
-            },
-          })}
-        />
+    <S.Background background={backgroundImage}>
+      <S.Container>
+        <S.RegisterForm onSubmit={handleSubmit(onSubmit, onError)}>
+          <S.FormTitle>Criar conta</S.FormTitle>
+          <S.UserInput
+            placeholder="Nome Completo"
+            {...register("name", {
+              required: "Informe o nome completo",
+              minLength: {
+                value: 2,
+                message: "Informe o nome completo",
+              },
+            })}
+          />
 
-        <S.EmailInput
-          placeholder="Email"
-          {...register("email", {
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Endereço de email inválido",
-            },
-          })}
-        />
+          <S.EmailInput
+            placeholder="Email"
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Endereço de email inválido",
+              },
+            })}
+          />
 
-        <S.PasswordInput
-          placeholder="Senha"
-          {...register("password", {
-            required: true,
-          })}
-        />
-        <S.SubmitButton>Registrar</S.SubmitButton>
-        <S.GoogleLogin onClick={signInWithGoogle}>
-          <FaGoogle />
-          <S.FormText>Sign in with Google</S.FormText>
-        </S.GoogleLogin>
-        <S.LoginNavigate>
-          Você já tem uma conta? <Link to="/login">Fazer login</Link>
-        </S.LoginNavigate>
-      </S.RegisterForm>
-    </S.Container>
+          <S.PasswordInput
+            placeholder="Senha"
+            {...register("password", {
+              required: true,
+            })}
+          />
+          <S.SubmitButton>Registrar</S.SubmitButton>
+          <S.LoginNavigate>
+            Você já tem uma conta? <Link to="/">Fazer login</Link>
+          </S.LoginNavigate>
+        </S.RegisterForm>
+      </S.Container>
+    </S.Background>
   );
 }

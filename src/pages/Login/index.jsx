@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import * as S from "./LoginPage.Style";
 import backgroundImage from "../../assets/aincrad.jpg";
-
 import { FcGoogle } from "react-icons/fc";
+import { MdMailOutline } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { BiShow } from "react-icons/bi";
+
 import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
@@ -15,8 +18,15 @@ export const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
-
   const { user, loading, signInWithGoogle, signUpWithEmail } = useAuth();
+  const [passwordShow, setPasswordShow] = useState(false);
+
+  const handleShowPassword = () => {
+    console.log("apertou");
+    setPasswordShow(!passwordShow);
+    console.log(passwordShow);
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,12 +48,26 @@ export const Login = () => {
       <S.Container>
         <S.LoginForm onSubmit={handleSubmit(onSubmit, onError)}>
           <S.FormTitle>Fazer Login</S.FormTitle>
-          <S.FormTextInput {...register("email")} />
-          <S.FormDiv>
+          <S.FormTextDiv>
+            <MdMailOutline />
+            <S.FormTextInput {...register("email")} />
+          </S.FormTextDiv>
+          <S.FormDivider>
             <S.FormText>Senha</S.FormText>
             <S.FormText>Esqueci a senha</S.FormText>
-          </S.FormDiv>
-          <S.FormPasswordInput {...register("password")} />
+          </S.FormDivider>
+          <S.FormTextDiv>
+            <RiLockPasswordLine />
+            <S.FormPasswordInput
+              {...register("password")}
+              name="password"
+              type={passwordShow ? "text" : "password"}
+            />
+            <BiShow
+              onClick={() => handleShowPassword()}
+              className="show-password"
+            />
+          </S.FormTextDiv>
           <S.SubmitButton />
           <S.GoogleSubmitButton onClick={signInWithGoogle}>
             <FcGoogle />
