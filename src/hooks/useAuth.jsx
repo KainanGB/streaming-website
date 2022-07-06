@@ -144,8 +144,19 @@ export function AuthProvider({ children }) {
         });
       }
     } catch (err) {
-      if (err.code === "auth/user-not-found")
-        toast.error("Usuário não encontrado ou não registrado");
+      switch (err.code) {
+        case "auth/user-not-found":
+          toast.error("Usuário não encontrado ou não registrado");
+          break;
+        case "auth/invalid-email":
+          toast.error("Formato de email inválido");
+          break;
+        case "auth/wrong-password":
+          toast.error("Senha inválida");
+          break;
+        default:
+          null;
+      }
     }
   };
 
