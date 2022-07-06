@@ -9,13 +9,6 @@ import { useCart } from "../../hooks/useCart.jsx";
 import { useAuth } from "../../hooks/useAuth";
 import { useState, useEffect } from "react";
 
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
-} from "reactstrap";
-
 export function Navbar() {
   const { cart } = useCart();
   const {
@@ -36,6 +29,8 @@ export function Navbar() {
 
   useEffect(() => {
     if (!loading) fetchUserData();
+
+    if (!user) navigate("/");
   }, [user, loading]);
 
   return (

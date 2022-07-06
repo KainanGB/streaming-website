@@ -2,11 +2,8 @@ import { useState, useEffect } from "react";
 import { Navbar } from "../../components/Navbar";
 import { useCart } from "../../hooks/useCart";
 
-import axios from "axios";
-
 import * as S from "./ProductList.Style";
 import { useAuth } from "../../hooks/useAuth";
-import { Spinner } from "reactstrap";
 
 export const ProductList = () => {
   const { addProduct, removeProduct } = useCart();
@@ -15,10 +12,6 @@ export const ProductList = () => {
 
   useEffect(() => {
     if (!loading) return;
-    //axios.get("http://localhost:3000/products").then((response) => {
-    //  const data = response.data.products;
-    //  setProducts(data);
-    //});
   }, [user, loading]);
 
   const handleAddProduct = (id, data) => {
@@ -32,10 +25,7 @@ export const ProductList = () => {
   return (
     <>
       <Navbar />
-      <Spinner
-        color="black"
-        className={loading ? "loading" : "loading--hide"}
-      ></Spinner>
+
       <S.Cards>
         {products
           ? products.map(

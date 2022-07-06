@@ -11,12 +11,12 @@ import axios from "axios";
 
 import img from "../../assets/boxes-img.png";
 
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
-} from "reactstrap";
+//import {
+//  Dropdown,
+//  DropdownItem,
+//  DropdownToggle,
+//  DropdownMenu,
+//} from "reactstrap";
 
 export const Cart = () => {
   const { cart, removeProduct, removeAllProducts, updateCartAmount } =
@@ -81,51 +81,6 @@ export const Cart = () => {
                         <S.ProductTitle>{name}</S.ProductTitle>
                         <S.ProductSmall>Em estoque</S.ProductSmall>
                         <S.ProductButtons>
-                          <Dropdown
-                            direction="up"
-                            //toggle={toggle}
-                            isOpen={openDropdown[index]}
-                          >
-                            <DropdownToggle
-                              caret
-                              className="dropdown-toggle"
-                              onClick={() => toggleDropdown(index)}
-                            >
-                              Qtd: {amount}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 1)}
-                              >
-                                1
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 2)}
-                              >
-                                2
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 3)}
-                              >
-                                3
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 4)}
-                              >
-                                4
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 5)}
-                              >
-                                5
-                              </DropdownItem>
-                              <DropdownItem
-                                onClick={() => updateCartAmount(id, 6)}
-                              >
-                                6
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </Dropdown>
                           <S.DeleteFromCartButton
                             onClick={() => removeProduct(id)}
                           >

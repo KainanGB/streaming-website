@@ -11,7 +11,7 @@ export default createGlobalStyle`
     box-sizing:border-box;
     
     font-size: 14px;
-    font-family: "AmazonEmber_W_He", sans-serif;
+    font-family: 'Lato', sans-serif;
 
     body {
       background-color: ${pallete.primaryClrGray};
@@ -55,11 +55,7 @@ export default createGlobalStyle`
     left: calc(50% - 7em);
     width: 15rem;
     height: 15rem;
-
-
   }
-
-
 
  .loading--hide {
   position: absolute;
@@ -68,6 +64,23 @@ export default createGlobalStyle`
   width: 15rem;
   height: 15rem;
   display:none;
+}
+
+.carousel {
+  background-color: red;
+  /*padding:10rem;*/
+  height:25rem ;
+  display:flex;
+  justify-content:center ;
+  align-items:center;width:100%;
+}
+
+.carousel-inner {
+
+}
+
+.carousel-img {
+  width:20rem ;
 }
 
 

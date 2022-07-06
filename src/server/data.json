@@ -1,0 +1,24 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "title": "This is some awesome thinking!",
+      "description": "This is some awesome thinking",
+      "genres": ["Romance", "Fantasy", "Adventure", "Comedy", "Drama", "Ecchi"],
+      "postId": 100,
+      "uploader": {
+        "id": 63,
+        "username": "eburras1q"
+      }
+    },
+    {
+      "id": 2,
+      "body": "What terrific math skills you’re showing!",
+      "postId": 27,
+      "user": {
+        "uploader": 71,
+        "username": "omarsland1y"
+      }
+    }
+  ]
+}

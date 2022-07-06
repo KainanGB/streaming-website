@@ -22,7 +22,6 @@ export const Login = () => {
   const [passwordShow, setPasswordShow] = useState(false);
 
   const handleShowPassword = () => {
-    console.log("apertou");
     setPasswordShow(!passwordShow);
     console.log(passwordShow);
   };
@@ -32,7 +31,7 @@ export const Login = () => {
   useEffect(() => {
     if (loading) return;
 
-    //if (user) navigate("/home");
+    if (user) navigate("/home");
   }, [user, loading]);
 
   const onSubmit = ({ email, password }) => {
