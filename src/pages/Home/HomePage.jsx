@@ -10,7 +10,7 @@ import * as S from "./HomePage.Style";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 
-import { Featured } from "../../components/featured";
+import { Featured } from "../../components/Featured";
 
 import { FiSearch } from "react-icons/fi";
 import { FaBell } from "react-icons/fa";
@@ -20,23 +20,26 @@ import hotBadge from "../../assets/hot-badge.png";
 
 export const HomePage = () => {
   const { user, loading, error } = useAuth();
-  const [featured, setFeatured] = useState([]);
+  //const [featured, setFeatured] = useState([]);
   const [airing, setAiring] = useState({});
   const [genres, setGenres] = useState([]);
   const navigate = useNavigate();
 
-  const fetchAnime = () => {
+  const fetchAnime = async () => {
     const currentAiring = axios.get("https://api.jikan.moe/v4/seasons/now");
     //const genres = axios.get("https://api.jikan.moe/v4/genres/anime");
 
     Promise.all([currentAiring])
       .then((results) => {
-        const data = results;
+        const data = results[0].data.data;
 
-        const airingData = data[0].data;
+        const airingData = data;
+
+        console.log(airingData);
         //const genresData = data[1].data;
 
         setAiring(airingData);
+
         //setGenres(genresData);
       })
       .catch((err) => {
@@ -45,8 +48,11 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchAnime();
-    //console.log(airing);
+    //fetchAnime();
+
+    return () => {
+      console.log("desmontou");
+    };
   }, [user, loading]);
 
   return (
@@ -54,16 +60,15 @@ export const HomePage = () => {
       <Navbar />
       <S.Content>
         <S.Featured></S.Featured>
+        {/*<Featured airing={airing} />*/}
 
         <S.Section>
           <S.Title>Current airing</S.Title>
-
           <S.CurrentAiring>
             <S.CurrentAiringCard>
               <img src={antImg} alt="" />
               <S.CurrentAiringBody>
                 <h3>Title aqui</h3>
-                <p>pipipopopo</p>
               </S.CurrentAiringBody>
             </S.CurrentAiringCard>
 
@@ -71,7 +76,6 @@ export const HomePage = () => {
               <img src={antImg} alt="" />
               <S.CurrentAiringBody>
                 <h3>Title aqui</h3>
-                <p>pipipopopo</p>
               </S.CurrentAiringBody>
             </S.CurrentAiringCard>
 
@@ -79,29 +83,34 @@ export const HomePage = () => {
               <img src={antImg} alt="" />
               <S.CurrentAiringBody>
                 <h3>Title aqui</h3>
-                <p>pipipopopo</p>
               </S.CurrentAiringBody>
             </S.CurrentAiringCard>
           </S.CurrentAiring>
         </S.Section>
 
-        <S.Main>
+        {/*<S.Main>
           <S.Title>Continue Watching</S.Title>
-          <S.Cards>
-            <S.Card background={antImg}>
-              <S.CardTitle>TESTE</S.CardTitle>
-            </S.Card>
-
-            <S.Card background={antImg}>
-              <S.CardTitle>TESTE2</S.CardTitle>
-            </S.Card>
-
-            <S.Card background={antImg}>
-              <S.CardBadge src={hotBadge} />
-              <S.CardTitle>TESTE3</S.CardTitle>
-            </S.Card>
-          </S.Cards>
-        </S.Main>
+          <S.CurrentAiring>
+            <S.CurrentAiringCard>
+              <img src={antImg} alt="" />
+              <S.CurrentAiringBody>
+                <h3>Title aqui</h3>
+              </S.CurrentAiringBody>
+            </S.CurrentAiringCard>
+            <S.CurrentAiringCard>
+              <img src={antImg} alt="" />
+              <S.CurrentAiringBody>
+                <h3>Title aqui</h3>
+              </S.CurrentAiringBody>
+            </S.CurrentAiringCard>
+            <S.CurrentAiringCard>
+              <img src={antImg} alt="" />
+              <S.CurrentAiringBody>
+                <h3>Title aqui</h3>
+              </S.CurrentAiringBody>
+            </S.CurrentAiringCard>
+          </S.CurrentAiring>
+        </S.Main>*/}
       </S.Content>
       <S.RightColumn>
         <S.Profile>
@@ -116,7 +125,7 @@ export const HomePage = () => {
           </S.ProfileImage>
         </S.Profile>
         <S.RightColumnDivider>
-          <h1>Popular Videos</h1>
+          <h1>Popular</h1>
           <p>View All</p>
         </S.RightColumnDivider>
         <S.RightColumnCards>
@@ -124,8 +133,6 @@ export const HomePage = () => {
             <img src={antImg} alt="" />
             <S.CardBody>
               <h3>Title aqui</h3>
-              <p>pipipopopo</p>
-              <p>Rating: 5</p>
             </S.CardBody>
           </S.RightColumnCard>
 
@@ -133,13 +140,11 @@ export const HomePage = () => {
             <img src={antImg} alt="" />
             <S.CardBody>
               <h3>Title aqui</h3>
-              <p>pipipopopo</p>
-              <p>Rating: 5</p>
             </S.CardBody>
           </S.RightColumnCard>
 
           <S.RightColumnDivider>
-            <h1>Watchlist </h1>
+            <h1>Watchlist</h1>
             <p>View All</p>
           </S.RightColumnDivider>
 
@@ -147,7 +152,6 @@ export const HomePage = () => {
             <img src={antImg} alt="" />
             <S.CardBody>
               <h3>Title aqui</h3>
-              <p>pipipopopo</p>
               <p>Rating: 5</p>
             </S.CardBody>
           </S.RightColumnCard>

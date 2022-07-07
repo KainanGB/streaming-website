@@ -8,7 +8,8 @@ export const NavBar = styled.nav`
   min-height: 100vh;
 `;
 export const Logo = styled.div`
-  padding: 1em;
+  margin: 2rem 0 2rem 1rem;
+  /*padding: 1em;*/
   h1 {
     font-size: 2rem;
   }
@@ -36,7 +37,7 @@ export const NavItem = styled.li`
   }
 `;
 export const NavTitle = styled.h2`
-  margin-top: 0.5em;
+  margin-top: 1em;
   padding-left: 0.7em;
   padding-bottom: 0.3em;
   font-weight: bold;

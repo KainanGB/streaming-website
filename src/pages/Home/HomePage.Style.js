@@ -6,13 +6,13 @@ export const Container = styled.div`
   /*max-width: 1400px;*/
   /*margin: 0 auto;*/
   display: grid;
-  grid-template-columns: 300px 1fr 300px;
+  grid-template-columns: 200px 1fr 230px;
 `;
 
 export const Content = styled.div`
   display: grid;
   flex-direction: column;
-  grid-template-rows: 1fr 300px 1fr;
+  grid-template-rows: 1fr 1fr;
 
   /*padding: 5em;*/
 `;
@@ -20,19 +20,20 @@ export const Content = styled.div`
 export const Featured = styled.div``;
 
 export const Main = styled.main`
-  margin: 0 4rem;
+  margin: 0 2rem;
 `;
 export const Cards = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 15rem;
+  height: 10rem;
   gap: 2rem;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h3`
   margin-top: 0;
-  margin-bottom: 2rem;
+
+  font-weight: bold;
 `;
 
 export const Card = styled.div`
@@ -45,7 +46,7 @@ export const Card = styled.div`
   align-items: end;
   justify-content: center;
 
-  width: 11rem;
+  width: 10rem;
   height: 100%;
 
   border-radius: 0.5rem;
@@ -76,7 +77,7 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-  margin: 2rem 0 5em 0;
+  margin: 2rem 0 2em 0;
 
   svg {
     margin: 0 1rem;
@@ -145,12 +146,13 @@ export const RightColumnCard = styled.div`
 `;
 
 export const Section = styled.section`
-  margin: 0 4rem;
+  margin: 0 2rem;
 `;
 
 export const CurrentAiring = styled.div`
   display: flex;
-  align-items: center;
+
+  gap: 2rem;
 `;
 
 export const CardBody = styled.div`
@@ -158,8 +160,7 @@ export const CardBody = styled.div`
 `;
 
 export const CurrentAiringCard = styled.div`
-  /*display: flex;*/
-  width: 10rem;
+  width: 11rem;
   transition: transform 2s;
 
   border-radius: 0.5rem;
@@ -168,10 +169,6 @@ export const CurrentAiringCard = styled.div`
 
   :hover {
     transform: scale(1.1);
-  }
-
-  img {
-    width: 8rem;
   }
 `;
 
